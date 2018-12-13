@@ -3,7 +3,7 @@ function $(s) {
 }
 
 var music_list = $("#list li");
-var size = 128;
+var size = 32;
 
 var box = $("#box")[0];
 var height, width;
@@ -53,7 +53,8 @@ function getDots() {
         Dots.push({
             x: x,
             y: y,
-            color: color
+            color: color,
+            cap: 0
         });
     }
 }
@@ -79,12 +80,23 @@ function draw(arr) {
     var w = width / size;
     ctx.fillStyle = line;
     for (var i = 0; i < size; i++) {
+        var o = Dots[i];
+
         if (draw.type == "column") {
             var h = arr[i] / 256 * height;
-            ctx.fillRect(w * i, height - h, w * 0.8, h);
+            ctx.fillRect(w * i, height - h + w * 0.8, w * 0.8, h);
+            ctx.fillRect(w * i, height - o.cap, w * 0.8, w * 0.8 > 10 ? 10 : w * 0.8);
+            o.cap--;
+            if (o.cap < 0) {
+                o.cap = 0;
+            }
+            if (h > 0 && o.cap < h + 40) {
+                // o.cap = h + 40 > height - w * 0.8 ? height - w * 0.8 : h + 40;
+                o.cap = h + 40;
+            }
         } else if (draw.type == "dot") {
             ctx.beginPath();
-            var o = Dots[i];
+
             var r = arr[i] / 256 * 50;
             ctx.arc(o.x, o.y, r, 0, Math.PI * 2, true);
             var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, r);
