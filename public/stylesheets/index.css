@@ -24,7 +24,7 @@ header {
   top: 10px;
   right: 10px;
   height: 150px;
-  border: solid #ffffff 1px;
+  /* border: solid #ffffff 1px; */
 }
 
 header h1 {
@@ -45,6 +45,7 @@ header .type:after {
 }
 
 header .type li {
+  list-style: none;
   float: left;
   height: 30px;
   line-height: 30px;
@@ -55,45 +56,29 @@ header .type li {
   cursor: pointer
 }
 
-
-@media screen and (max-height:450px) {
-	header .type li {
-		height: 20px;
-		line-height: 20px;
-		width: 50px
-	}
-}
-
-@media screen and (max-width:500px) {
-	header .type li {
-		height: 20px;
-		line-height: 20px;
-		width: 50px
-	}
-}
-
 header .type li:first-child {
-	border-left: solid 1px #fff;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px
+  border-left: solid 1px #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px
 }
 
 header .type li:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px
 }
 
 header .type li.selected {
-	background: #fff;
-	color: #000
+  background: #fff;
+  color: #000
 }
 
 .left {
   left: 10px;
   top: 170px;
   bottom: 10px;
-  width: 400px;
+  width: 15%;
   border: solid #ffffff 1px;
+  overflow: auto;
 }
 
 .left ul {
@@ -104,6 +89,9 @@ header .type li.selected {
   height: 30px;
   line-height: 30px;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .left ul li.selected {
@@ -114,6 +102,59 @@ header .type li.selected {
   top: 170px;
   right: 10px;
   bottom: 10px;
-  left: 420px;
+  left: -webkit-calc(15% + 20px);
+  left: calc(15% + 20px);
   border: solid #ffffff 1px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: #999999;
+  border-radius: 10px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  background: #ffffff;
+  border-radius: 100%;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #999999;
+  border-radius: 10px;
+  outline: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  background: #ffffff;
+  border-radius: 100%;
+}
+
+@media screen and (max-width:800px), screen and (max-height:500px) {
+  body {
+    font-size: 12px;
+  }
+  header {
+    height: 80px;
+  }
+  header h1 {
+    font-size: 24px;
+    height: 34px;
+    line-height: 34px;
+  }
+  header .type li {
+    height: 16px;
+    line-height: 16px;
+    width: 50px;
+  }
+  .left, .right {
+    top: 100px;
+  }
 }
