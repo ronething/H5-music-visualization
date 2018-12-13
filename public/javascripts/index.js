@@ -53,6 +53,7 @@ function getDots() {
         Dots.push({
             x: x,
             y: y,
+            dx: random(0.5, 1.5),
             color: color,
             cap: 0
         });
@@ -102,6 +103,8 @@ function draw(arr) {
             g.addColorStop(1, o.color);
             ctx.fillStyle = g;
             ctx.fill();
+            o.x += o.dx;
+            o.x = o.x > width ? 0 : o.x;
             // ctx.strokeStyle = "#fff";
             // ctx.stroke();
         }
