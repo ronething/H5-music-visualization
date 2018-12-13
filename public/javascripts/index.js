@@ -49,7 +49,7 @@ function getDots() {
     for (var i = 0; i < size; i++) {
         var x = random(0, width);
         var y = random(0, height);
-        var color = "rgb(" + random(0, 255) + "," + random(0, 255) + "," + random(0, 255) + ")";
+        var color = "rgba(" + random(0, 255) + "," + random(0, 255) + "," + random(0, 255) + ",0)";
         Dots.push({
             x: x,
             y: y,
@@ -81,7 +81,6 @@ function draw(arr) {
     ctx.fillStyle = line;
     for (var i = 0; i < size; i++) {
         var o = Dots[i];
-
         if (draw.type == "column") {
             var h = arr[i] / 256 * height;
             ctx.fillRect(w * i, height - h + w * 0.8, w * 0.8, h);
@@ -96,8 +95,7 @@ function draw(arr) {
             }
         } else if (draw.type == "dot") {
             ctx.beginPath();
-
-            var r = arr[i] / 256 * 50;
+            var r = arr[i] / 256 * (height > width ? width : height) / 10;
             ctx.arc(o.x, o.y, r, 0, Math.PI * 2, true);
             var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, r);
             g.addColorStop(0, "#fff");
